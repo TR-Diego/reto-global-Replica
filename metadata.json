@@ -1,0 +1,6 @@
+{
+  "name": "Reto Global",
+  "description": "Prototipo web jugable en español inspirado en el videojuego serio Reto Global para promover la conciencia sobre el calentamiento global.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
