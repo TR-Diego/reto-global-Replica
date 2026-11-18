@@ -33,9 +33,7 @@ export const DemoQuizModal: React.FC<DemoQuizModalProps> = ({ onClose }) => {
             >
               Preguntas educativas de demostración
             </h2>
-            <p className="text-xs text-amber-300 mt-1">
-              Aviso: Son preguntas de demostración inspiradas en los temas del artículo para mostrar el flujo en clase; no corresponden al cuestionario validado del estudio y no guardan datos personales.
-            </p>
+        
           </div>
           <button
             type="button"

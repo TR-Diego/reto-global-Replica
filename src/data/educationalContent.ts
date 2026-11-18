@@ -186,36 +186,72 @@ export const DEMO_CLASSROOM_QUESTIONS: DemoQuestion[] = [
     id: 1,
     dimension: 'Causas',
     afirmacion:
-      'La causa principal del aumento acelerado de la temperatura terrestre en los últimos dos siglos son las actividades humanas, como la quema de combustibles fósiles.',
-    esVerdadera: true,
+      'Una ciudad reemplaza sus buses diésel por buses eléctricos, pero genera esa electricidad quemando carbón y continúa talando bosques. Con esos cambios basta para afirmar que redujo a cero su aporte al calentamiento global.',
+    esVerdadera: false,
     explicacion:
-      'Correcto: desde la era industrial las actividades humanas han incrementado en más de 30% el CO2 atmosférico.',
+      'Falso. Electrificar los buses no elimina las emisiones si la electricidad aún se produce quemando carbón. Además, la deforestación libera carbono y reduce los árboles que pueden absorber CO₂.',
   },
   {
     id: 2,
     dimension: 'Concepto',
     afirmacion:
-      'El calentamiento global ocurre principalmente porque la Tierra se está acercando físicamente al Sol.',
-    esVerdadera: false,
+      'El aumento de CO₂ no crea el calor que llega del Sol: intensifica el efecto invernadero al absorber y redistribuir parte del calor que la Tierra vuelve a emitir.',
+    esVerdadera: true,
     explicacion:
-      'Falso: el calentamiento actual se debe a la acumulación de gases de efecto invernadero que atrapan calor en la atmósfera, no a un acercamiento al Sol.',
+      'Verdadero. La cápsula del juego explica que la Tierra absorbe energía y la reemite como calor; gases como el CO₂ y el metano absorben parte de ese calor y lo dispersan, calentando el planeta.',
   },
   {
     id: 3,
-    dimension: 'Consecuencias',
+    dimension: 'Causas',
     afirmacion:
-      'Las altas temperaturas globales aumentan los niveles de ozono y contaminantes del aire, agravando enfermedades cardiovasculares y respiratorias.',
+      'Si se detuviera la quema de combustibles fósiles, pero continuara la deforestación para ampliar pastizales, todavía habría una actividad humana que contribuye al calentamiento global.',
     esVerdadera: true,
     explicacion:
-      'Correcto: tal como muestra la cápsula del minijuego shooter, el calor extremo impacta directamente la salud respiratoria y cardiovascular.',
+      'Correcto. El artículo identifica tanto la quema de combustibles fósiles como la deforestación para cambiar el uso del suelo entre las actividades humanas que contribuyen al calentamiento.',
   },
   {
     id: 4,
-    dimension: 'Acciones',
+    dimension: 'Consecuencias',
     afirmacion:
-      'La energía eólica y la energía solar son fuentes limpias porque no emiten dióxido de carbono durante su producción eléctrica.',
+      'El juego relaciona temperaturas más altas con aumentos de ozono y otros contaminantes del aire, que pueden agravar problemas respiratorios y cardiovasculares.',
     esVerdadera: true,
     explicacion:
-      'Correcto: reemplazar combustibles fósiles por fuentes renovables como la solar y eólica reduce las emisiones de GEI.',
+      'Verdadero. Esa es la relación que presenta la cápsula educativa: más calor puede elevar los niveles de ozono y otros contaminantes, con efectos en la salud respiratoria y cardiovascular.',
+  },
+  {
+    id: 5,
+    dimension: 'Causas',
+    afirmacion:
+      'Como los árboles y los océanos absorben hasta la mitad de las emisiones de CO₂, sus sumideros naturales hacen innecesario reducir las emisiones humanas.',
+    esVerdadera: false,
+    explicacion:
+      'Falso. El artículo explica que árboles y océanos absorben una parte importante de las emisiones, pero la acumulación de CO₂ sigue aumentando. Los sumideros no sustituyen la reducción de emisiones.',
+  },
+  {
+    id: 6,
+    dimension: 'Acciones',
+    afirmacion:
+      'En Reto Global, las monedas se invierten en cuatro sectores: transporte público sin emisiones, energía limpia, reforestación y vehículos eléctricos.',
+    esVerdadera: true,
+    explicacion:
+      'Verdadero. Esos son los cuatro sectores de mejora descritos en el artículo y representados en el juego. Las mejoras convierten las recompensas en acciones de mitigación.',
+  },
+  {
+    id: 7,
+    dimension: 'Causas',
+    afirmacion:
+      'Las cifras del artículo describen dos medidas distintas: la concentración atmosférica de CO₂ aumentó más de 30% desde 1850, y las emisiones de CO₂ crecieron 45% durante las últimas dos décadas.',
+    esVerdadera: true,
+    explicacion:
+      'Verdadero. La cápsula sobre el minijuego de plataformas habla del aumento de la concentración desde 1850; otra cápsula menciona el aumento de emisiones durante las últimas dos décadas. Cambian tanto la medida como el periodo.',
+  },
+  {
+    id: 8,
+    dimension: 'Acciones',
+    afirmacion:
+      'Para reducir emisiones del transporte, el juego recomienda caminar o usar bicicleta en trayectos cortos y recurrir al transporte público en distancias largas.',
+    esVerdadera: true,
+    explicacion:
+      'Verdadero. La cápsula recomienda caminar o ir en bicicleta cuando sea posible y usar transporte público en trayectos largos; también propone renovar la flota de buses para hacerla más ecológica.',
   },
 ];

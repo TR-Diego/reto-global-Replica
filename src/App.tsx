@@ -4,7 +4,7 @@
  */
 
 import { useEffect, useState } from 'react';
-import { Music, Volume2, VolumeX } from 'lucide-react';
+import { Music, Power, Volume2, VolumeX } from 'lucide-react';
 import { DemoQuizModal } from './components/DemoQuizModal';
 import { HelpControlsModal } from './components/HelpControlsModal';
 import { SECTOR_COST } from './data/educationalContent';
@@ -39,6 +39,7 @@ export default function App() {
   const [musicEnabled, setMusicEnabled] = useState<boolean>(true);
   const [showHelp, setShowHelp] = useState<boolean>(false);
   const [showDemoQuiz, setShowDemoQuiz] = useState<boolean>(false);
+  const [shutdownState, setShutdownState] = useState<'idle' | 'stopping' | 'stopped' | 'error'>('idle');
 
   // Desbloquea AudioContext en la primera interacción del usuario (política de navegadores)
   useEffect(() => {
@@ -90,6 +91,23 @@ export default function App() {
     setHasSeenTutorial(false);
     setLastResult(null);
     setMinigamesPlayed(0);
+  };
+
+  const handleShutdown = async () => {
+    const confirmed = window.confirm(
+      '¿Salir y apagar por completo el servidor local de Reto Global? Tendrás que volver a abrir el lanzador para jugar.'
+    );
+    if (!confirmed) return;
+
+    setShutdownState('stopping');
+    try {
+      const response = await fetch('/__retoglobal/shutdown', { method: 'POST' });
+      if (!response.ok) throw new Error('El servidor rechazó la solicitud de apagado.');
+      setShutdownState('stopped');
+      window.setTimeout(() => window.close(), 500);
+    } catch {
+      setShutdownState('error');
+    }
   };
 
   const handleMinigameComplete = (result: MinigameResult) => {
@@ -174,13 +192,26 @@ export default function App() {
 
         {/* Zona 3: Acción primaria visible para reiniciar partida */}
         <div className="shrink-0">
-          <button
-            type="button"
-            onClick={handleRestart}
-            className="px-3.5 py-1.5 rounded-lg bg-rose-700 hover:bg-rose-600 text-xs font-display font-bold text-white transition-colors whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
-          >
-            Reiniciar partida
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={handleRestart}
+              className="px-3.5 py-1.5 rounded-lg bg-slate-700 hover:bg-slate-600 text-xs font-display font-bold text-white transition-colors whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+            >
+              Reiniciar
+            </button>
+            <button
+              type="button"
+              onClick={handleShutdown}
+              disabled={shutdownState === 'stopping' || shutdownState === 'stopped'}
+              title="Salir y apagar el servidor local"
+              aria-label="Salir y apagar el servidor local"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-rose-800 hover:bg-rose-700 disabled:opacity-60 text-xs font-display font-bold text-white transition-colors whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+            >
+              <Power className="w-3.5 h-3.5" />
+              Salir y apagar
+            </button>
+          </div>
         </div>
       </header>
 
@@ -277,6 +308,31 @@ export default function App() {
       {showHelp && <HelpControlsModal onClose={() => setShowHelp(false)} />}
       {showDemoQuiz && (
         <DemoQuizModal onClose={() => setShowDemoQuiz(false)} />
+      )}
+
+      {shutdownState !== 'idle' && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-slate-950/90 p-6" role="status" aria-live="polite">
+          <div className="max-w-lg rounded-2xl border border-slate-700 bg-slate-900 p-7 text-center shadow-2xl">
+            {shutdownState === 'stopping' ? (
+              <>
+                <h2 className="font-display text-xl font-bold text-white">Apagando Reto Global…</h2>
+                <p className="mt-3 text-sm text-slate-300">Cerrando el servidor local y la partida.</p>
+              </>
+            ) : shutdownState === 'stopped' ? (
+              <>
+                <h2 className="font-display text-xl font-bold text-emerald-300">Servidor apagado</h2>
+                <p className="mt-3 text-sm text-slate-300">Reto Global ya no está activo en el puerto 3000. Si esta ventana no se cierra sola, puedes cerrarla con la X.</p>
+                <button type="button" onClick={() => window.close()} className="mt-5 rounded-lg bg-emerald-700 px-4 py-2 text-sm font-bold text-white hover:bg-emerald-600">Cerrar ventana</button>
+              </>
+            ) : (
+              <>
+                <h2 className="font-display text-xl font-bold text-amber-300">No se pudo apagar desde esta ventana</h2>
+                <p className="mt-3 text-sm text-slate-300">Si abriste el juego en Windows, usa «Detener Reto Global.bat» dentro de la carpeta del proyecto.</p>
+                <button type="button" onClick={() => setShutdownState('idle')} className="mt-5 rounded-lg bg-slate-700 px-4 py-2 text-sm font-bold text-white hover:bg-slate-600">Volver al juego</button>
+              </>
+            )}
+          </div>
+        </div>
       )}
     </div>
   );
